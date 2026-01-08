@@ -67,7 +67,7 @@
   <!-- Thread priority for the hardware interface -->
   <xacro:arg name="thread_priority" default="50" />
 
-  <!-- ADDED BY ME: Arm prefix of the robot -->
+  <!-- Arm prefixes of the robot -->
   <xacro:arg name="arm_prefixes" default="['left','right']" />
   <xacro:property name="arm_prefixes_list" value="${$(arg arm_prefixes)}" />
 
@@ -80,7 +80,6 @@
   </xacro:mount>
 
   <xacro:property name="number_of_robots" value = "2"/>
-  <!--<xacro:property name="arm_prefixes_list" value="${['left','right']}" /> -->
   <xacro:macro name="loop" params="i">
     <xacro:unless value="${i == number_of_robots}">
 
