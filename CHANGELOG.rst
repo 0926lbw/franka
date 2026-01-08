@@ -18,6 +18,8 @@ Changelog for package franka_description
 * feat: pass is_async argument to franka_arm.ros2_control.xacro
 * feat: pass thread_priority argument to franka_arm.ros2_control.xacro
 * feat: bump ros2_control version to 1.0.0
+* feat: fr3_duo srdf added to franka description
+* feat: fr3_duo urdf now supports different arm prefixes
 
 2.2.0
 ----------

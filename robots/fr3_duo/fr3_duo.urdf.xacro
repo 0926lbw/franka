@@ -6,7 +6,7 @@
 
   <!-- Define arguments -->
   <!-- The IDs of the robot models to be used -->
-  <xacro:arg name="robot_types" default="['fr3v2','fr3v2']" />
+  <xacro:arg name="robot_types" default="['fr3','fr3']" />
   <xacro:property name="robot_types_list" value="${$(arg robot_types)}" />
   
   <!-- Don't print a prefix for joints, visuals, and links? -->
@@ -67,6 +67,10 @@
   <!-- Thread priority for the hardware interface -->
   <xacro:arg name="thread_priority" default="50" />
 
+  <!-- ADDED BY ME: Arm prefix of the robot -->
+  <xacro:arg name="arm_prefixes" default="['left','right']" />
+  <xacro:property name="arm_prefixes_list" value="${$(arg arm_prefixes)}" />
+
   <link name="base">
   </link>
 
@@ -76,22 +80,25 @@
   </xacro:mount>
 
   <xacro:property name="number_of_robots" value = "2"/>
-  <xacro:property name="arm_prefixes_list" value="${['left','right']}" /> 
+  <!--<xacro:property name="arm_prefixes_list" value="${['left','right']}" /> -->
   <xacro:macro name="loop" params="i">
     <xacro:unless value="${i == number_of_robots}">
 
       <xacro:property name="mount_to_base" value="${xacro.load_yaml('$(arg mount_kinematics)')}"/>
       <xacro:property name="robot_prefix" value="${arm_prefixes_list[i]}"/>
       <xacro:property name="modified_prefix" value="${robot_prefix + '_' if robot_prefix else ''}"/>
+
+      <xacro:if value="${i == 0}">
+        <xacro:property name="mount_key" value="left" />
+      </xacro:if>
+      <xacro:unless value="${i == 0}">
+        <xacro:property name="mount_key" value="right" />
+      </xacro:unless>
+
+      <xacro:property name="mount_corner" value="${mount_to_base[mount_key]}" lazy_eval="false" />
       <joint name="${arm_prefixes_list[i]}_base_joint" type="fixed">
         <parent link="mount_link"/>
         <child link="${arm_prefixes_list[i]}_base"/>
-        <xacro:if value="${robot_prefix == 'left'}">
-          <xacro:property name="mount_corner" value="${mount_to_base['left']}" lazy_eval="false" />
-        </xacro:if>
-        <xacro:if value="${robot_prefix == 'right'}">
-          <xacro:property name="mount_corner" value="${mount_to_base['right']}" lazy_eval="false" />
-        </xacro:if>
         <origin rpy="${mount_corner.kinematic.roll} ${mount_corner.kinematic.pitch} ${mount_corner.kinematic.yaw}" xyz="${mount_corner.kinematic.x} ${mount_corner.kinematic.y} ${mount_corner.kinematic.z}"/>
       </joint>
 
