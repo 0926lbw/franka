@@ -2,11 +2,12 @@
 Changelog for package franka_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-UNRELEASED
+2.4.0 (2026-01-26)
 ----------
 
 * feat: fr3_duo srdf added to franka description
 * feat: fr3_duo urdf now supports different arm prefixes
+* fix: removed olv_description_module dependency
 
 2.3.2 (2026-01-22)
 ------------------
