@@ -8,7 +8,7 @@ docker build -t urdf_creation \
 echo 
 
 docker run -u $(id -u) \
-    -v $(pwd):/workspaces/src/franka_description \
+    -v "$(pwd):/workspaces/src/franka_description" \
     -w /workspaces/src/franka_description \
     urdf_creation \
     .docker/create_urdf.entrypoint.sh $*
