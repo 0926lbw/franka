@@ -7,8 +7,10 @@
                   ros2_control:=true
                   use_fake_hardware:=false
                   fake_sensor_commands:=false
-                  reduced_version:=false">
-
+                  reduced_version:=false
+                  is_async:=false
+                  thread_priority:=50">
+                  
     <xacro:include filename="$(find franka_description)/robots/tmrv0_2/argo_drive.xacro" />
     <xacro:include filename="$(find franka_description)/robots/tmrv0_2/caster_wheel.xacro" />
     <xacro:include filename="$(find franka_description)/robots/tmrv0_2/rocker_arm.xacro" />

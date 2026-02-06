@@ -5,10 +5,17 @@
     params="mobile_robot_type
             robot_ip
             use_fake_hardware
-            fake_sensor_commands">
-    <ros2_control name="TmrHardware" type="system">
+            fake_sensor_commands 
+            is_async:=false
+            thread_priority:=50">
+    <ros2_control name="TmrHardware" type="system" is_async="${is_async}">
+      <xacro:if value="${is_async}">
+          <properties>
+            <async scheduling_policy="detached" print_warnings="true" thread_priority="${thread_priority}" manage_overruns="false"/>
+          </properties>
+      </xacro:if>
       <hardware>
-        <param name="version">0.1.0</param>
+        <param name="version">1.0.0</param>
         <param name="mobile_robot_type">${mobile_robot_type}</param>
         <param name="robot_type">tmrv0_2</param>
         <xacro:if value="${use_fake_hardware}">

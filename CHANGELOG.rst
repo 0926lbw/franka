@@ -7,6 +7,7 @@ UNRELEASED
 * chore: tmrv0_2 replace lidar with mounting point and add imu mounting point
 * fix: mounting point typo in tmrv0_2.xacro
 * feat: add the motor inertia and gear ratio to the urdfs of arms
+* fix: adaptations for async control
 
 2.4.0 (2026-01-26)
 ----------
