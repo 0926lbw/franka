@@ -9,6 +9,7 @@ Changelog for package franka_description
 * fix: mounting point typo in tmrv0_2.xacro
 * feat: add the motor inertia and gear ratio to the urdfs of arms
 * fix: adaptations for async control
+* feat: adaptations for gazebo
 
 2.4.0 (2026-01-26)
 ----------
