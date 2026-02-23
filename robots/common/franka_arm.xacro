@@ -16,7 +16,7 @@
     <xacro:property name="prefix" value="${'' if no_prefix else arm_prefix + robot_type + '_'}" />
     <xacro:property name="with_accelerometers" value="${'false' if accelerometer_config == 'none' else 'true'}" />
 
-    <xacro:if value="${gazebo}">
+    <xacro:if value="${gazebo and connected_to == 'base'}">
       <xacro:property name="connected_to" value="" />
     </xacro:if>
 
