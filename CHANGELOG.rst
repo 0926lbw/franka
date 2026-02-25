@@ -10,9 +10,10 @@ Changelog for package franka_description
 * feat: add the motor inertia and gear ratio to the urdfs of arms
 * fix: adaptations for async control
 * feat: adaptations for gazebo
+* fix: corrected accelerometer frames for fr3v1, fr3v2, fr3v2.1
 
 2.4.0 (2026-01-26)
-----------
+------------------
 
 * feat: fr3_duo srdf added to franka description
 * feat: fr3_duo urdf now supports different arm prefixes
