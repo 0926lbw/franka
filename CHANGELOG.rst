@@ -11,6 +11,7 @@ Changelog for package franka_description
 * fix: adaptations for async control
 * feat: adaptations for gazebo
 * fix: corrected accelerometer frames for fr3v1, fr3v2, fr3v2.1
+* fix: properly handle arm_prefixes in srdf
 
 2.4.0 (2026-01-26)
 ------------------
