@@ -1,0 +1,26 @@
+duo_mount_center:
+  kinematic:
+    x: 0.0369
+    y: 0.0
+    z: 0.050885
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
+
+duo_mount_left:
+  kinematic:
+    x: 0.0
+    y: 0.05018
+    z: 0.0
+    roll: -0.89334809
+    pitch: -0.17456074
+    yaw: -0.46334506
+
+duo_mount_right:
+  kinematic:
+    x: 0.0
+    y: -0.05018
+    z: 0.0
+    roll: 0.89334809
+    pitch: -0.17456074
+    yaw: 0.46334506

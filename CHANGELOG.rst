@@ -2,6 +2,11 @@
 Changelog for package franka_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+UNRELEASED
+----------
+
+* chore: Split the franka head, spine and mount out of fr3_duo/mobile_fr3_duo
+
 2.6.0 (2026-03-02)
 ------------------
 * feat: adaptations for gazebo

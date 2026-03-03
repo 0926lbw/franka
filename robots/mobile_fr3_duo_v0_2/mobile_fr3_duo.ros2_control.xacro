@@ -31,16 +31,17 @@
             robot_namespace">
     <ros2_control name="controller_manager" type="system" is_async="${is_async}">
       <xacro:if value="${is_async}">
-          <properties>
-            <async scheduling_policy="detached" print_warnings="true" thread_priority="${thread_priority}" manage_overruns="false"/>
-          </properties>
+        <properties>
+          <async scheduling_policy="detached" print_warnings="true" thread_priority="${thread_priority}"
+            manage_overruns="false"/>
+        </properties>
       </xacro:if>
       <hardware>
         <param name="version">1.0.0</param>
         <param name="mobile_robot_type">${mobile_robot_type}</param>
         <param name="robot_type">mobile_fr3_duo</param>
         <xacro:if value="${use_fake_hardware}">
-          <plugin>fake_components/GenericSystem</plugin>
+          <plugin>mock_components/GenericSystem</plugin>
           <param name="mock_sensor_commands">${fake_sensor_commands}</param>
           <param name="state_following_offset">0.0</param>
         </xacro:if>
@@ -94,22 +95,36 @@
       <xacro:property name="arm2_prefix" value="${arm_prefixes_list[2]}"/>
 
       <!-- Left arm -->
-      <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_joint1" initial_position="0.0" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
-      <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_joint2" initial_position="${-pi/4}" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
-      <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_joint3" initial_position="0.0" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
-      <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_joint4" initial_position="${-3*pi/4}" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
-      <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_joint5" initial_position="0.0" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
-      <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_joint6" initial_position="${pi/2}" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
-      <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_joint7" initial_position="${pi/4}" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+      <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_joint1" initial_position="0.0"
+        gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+      <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_joint2" initial_position="${-pi/4}"
+        gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+      <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_joint3" initial_position="0.0"
+        gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+      <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_joint4" initial_position="${-3*pi/4}"
+        gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+      <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_joint5" initial_position="0.0"
+        gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+      <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_joint6" initial_position="${pi/2}"
+        gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+      <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_joint7" initial_position="${pi/4}"
+        gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
 
       <!-- Right arm -->
-      <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_joint1" initial_position="0.0" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
-      <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_joint2" initial_position="${-pi/4}" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
-      <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_joint3" initial_position="0.0" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
-      <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_joint4" initial_position="${-3*pi/4}" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
-      <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_joint5" initial_position="0.0" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
-      <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_joint6" initial_position="${pi/2}" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
-      <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_joint7" initial_position="${pi/4}" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+      <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_joint1" initial_position="0.0"
+        gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+      <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_joint2" initial_position="${-pi/4}"
+        gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+      <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_joint3" initial_position="0.0"
+        gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+      <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_joint4" initial_position="${-3*pi/4}"
+        gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+      <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_joint5" initial_position="0.0"
+        gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+      <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_joint6" initial_position="${pi/2}"
+        gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+      <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_joint7" initial_position="${pi/4}"
+        gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
 
       <!-- Spine -->
       <joint name="franka_spine_vertical_joint">
@@ -202,10 +217,12 @@
       <xacro:general_purpose_io prefix="${arm2_prefix}_wx" command_interface="cartesian_velocity" index="3"/>
       <xacro:general_purpose_io prefix="${arm2_prefix}_wy" command_interface="cartesian_velocity" index="4"/>
       <xacro:general_purpose_io prefix="${arm2_prefix}_wz" command_interface="cartesian_velocity" index="5"/>
-      
+
       <xacro:if value="${gazebo and hand}">
-        <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_finger_joint1" initial_position="0.0" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
-        <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_finger_joint1" initial_position="0.0" gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+        <xacro:configure_arm_joint joint_name="${arm1_prefix}_${arm1_type}_finger_joint1" initial_position="0.0"
+          gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
+        <xacro:configure_arm_joint joint_name="${arm2_prefix}_${arm2_type}_finger_joint1" initial_position="0.0"
+          gazebo="${gazebo}" gazebo_effort="${gazebo_effort}"/>
       </xacro:if>
     </ros2_control>
 

@@ -5,30 +5,32 @@
     params="mobile_robot_type
             robot_ip
             use_fake_hardware
-            fake_sensor_commands 
+            fake_sensor_commands
             is_async:=false
             thread_priority:=50
             gazebo
             robot_namespace">
     <ros2_control name="TmrHardware" type="system" is_async="${is_async}">
       <xacro:if value="${is_async}">
-          <properties>
-            <async scheduling_policy="detached" print_warnings="true" thread_priority="${thread_priority}" manage_overruns="false"/>
-          </properties>
+        <properties>
+          <async scheduling_policy="detached" print_warnings="true" thread_priority="${thread_priority}"
+            manage_overruns="false"/>
+        </properties>
       </xacro:if>
       <hardware>
         <param name="version">1.0.0</param>
         <param name="mobile_robot_type">${mobile_robot_type}</param>
         <param name="robot_type">tmrv0_2</param>
         <xacro:if value="${use_fake_hardware}">
-          <plugin>fake_components/GenericSystem</plugin>
+          <plugin>mock_components/GenericSystem</plugin>
           <param name="mock_sensor_commands">${fake_sensor_commands}</param>
           <param name="state_following_offset">0.0</param>
         </xacro:if>
 
         <xacro:if value="${gazebo}">
           <plugin>gz_ros2_control/GazeboSimSystem</plugin>
-          <plugin>fake_components/GenericSystem</plugin>
+          <plugin>mock_components/GenericSystem</plugin>
+
           <param name="fake_sensor_commands">${fake_sensor_commands}</param>
           <param name="state_following_offset">0.0</param>
         </xacro:if>

@@ -27,9 +27,16 @@ if(BUILD_TESTING)
 endif()
 
 # Install launch files.
-install(DIRECTORY
-  launch robots end_effectors meshes rviz
-  DESTINATION share/${PROJECT_NAME}/
+install(
+  DIRECTORY
+    accessories
+    launch
+    robots
+    end_effectors
+    meshes
+    rviz
+  DESTINATION
+    share/${PROJECT_NAME}/
 )
 
 ament_package()

@@ -34,7 +34,8 @@ def robot_state_publisher_spawner(context: LaunchContext, robot_type, load_gripp
         robot_type_str + '.urdf.xacro',
     )
     robot_description = xacro.process_file(
-        franka_xacro_filepath, mappings={'hand': load_gripper_str, 'ee_id': ee_id_str}
+        franka_xacro_filepath, mappings={'hand': load_gripper_str,
+                                         'ee_id': ee_id_str},
     ).toprettyxml(indent='  ')
 
     return [
@@ -79,13 +80,13 @@ def generate_launch_description():
             DeclareLaunchArgument(
                 ee_id_parameter_name,
                 default_value='franka_hand',
-                description='ID of the type of end-effector used. Supporter values: '
+                description='ID of the type of end-effector used. Supported values: '
                 'none, franka_hand, cobot_pump',
             ),
             DeclareLaunchArgument(
                 robot_type_parameter_name,
-                description='ID of the type of arm used. Supporter values: '
-                'fer, fr3, fp3, fr3v2, fr3v2_1, tmrv0_2',
+                description='ID of the type of robot used. Supported values: '
+                'fer, fr3, fp3, fr3v2, fr3v2_1, tmrv0_2, fr3v2_duo, mobile_fr3_duo_v0_2',
             ),
             robot_state_publisher_spawner_opaque_function,
             Node(
