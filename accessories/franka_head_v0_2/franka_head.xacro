@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <xacro:include filename="$(find franka_description)/robots/common/utils.xacro"/>
+
+  <xacro:property name="head_kinematics"
+    value="${xacro.load_yaml('$(find franka_description)/accessories/franka_head_v0_2/kinematics.yaml')}"/>
+
   <xacro:macro name="head" params="parent">
+    <xacro:property name="inertials"
+      value="${xacro.load_yaml('$(find franka_description)/accessories/franka_head_v0_2/inertials.yaml')}"/>
     <link name="head_link">
       <visual>
         <geometry>
@@ -13,31 +20,27 @@
           <mesh filename="package://franka_description/meshes/accessories/franka_head_v0_2/collision/franka_head.stl"/>
         </geometry>
       </collision>
-      <inertial>
-        <mass value="1.0"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
-      </inertial>
+      <xacro:franka-inertials name="head"/>
     </link>
 
     <joint name="head_joint" type="fixed">
       <parent link="${parent}"/>
       <child link="head_link"/>
-      <origin xyz="0 0 0.167" rpy="0 0 0"/>
+      <origin
+        xyz="${head_kinematics['head']['kinematic']['x']} ${head_kinematics['head']['kinematic']['y']} ${head_kinematics['head']['kinematic']['z']}"
+        rpy="${head_kinematics['head']['kinematic']['roll']} ${head_kinematics['head']['kinematic']['pitch']} ${head_kinematics['head']['kinematic']['yaw']}"/>
     </joint>
 
     <link name="head_camera_mounting_point">
-      <inertial>
-        <mass value="0.001"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
-      </inertial>
+      <xacro:franka-inertials name="head_camera_mounting_point"/>
     </link>
 
     <joint name="head_camera_mounting_point_joint" type="fixed">
-      <origin xyz="0.0498 -0.02 0.2345" rpy="0 0.7156 0"/>
       <parent link="head_link"/>
       <child link="head_camera_mounting_point"/>
+      <origin
+        xyz="${head_kinematics['head_camera_mounting_point']['kinematic']['x']} ${head_kinematics['head_camera_mounting_point']['kinematic']['y']} ${head_kinematics['head_camera_mounting_point']['kinematic']['z']}"
+        rpy="${head_kinematics['head_camera_mounting_point']['kinematic']['roll']} ${head_kinematics['head_camera_mounting_point']['kinematic']['pitch']} ${head_kinematics['head_camera_mounting_point']['kinematic']['yaw']}"/>
     </joint>
 
   </xacro:macro>
