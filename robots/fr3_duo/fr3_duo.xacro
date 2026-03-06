@@ -50,7 +50,7 @@
 
         <!-- Attach the robot arm to the mount -->
         <joint name="${arm_prefixes_list[i]}_base_joint" type="fixed">
-          <parent link="duo_mount_${arm_prefixes_list[i]}"/>
+          <parent link="fr3_duo_mount_${arm_prefixes_list[i]}"/>
           <child link="${arm_prefixes_list[i]}_base"/>
         </joint>
 

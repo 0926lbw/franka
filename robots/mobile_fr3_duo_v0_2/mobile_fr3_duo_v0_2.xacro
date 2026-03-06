@@ -67,7 +67,7 @@
 
     <!-- Head and Spine -->
     <xacro:franka_spine parent="base_link"/>
-    <xacro:head parent="duo_mount_origin"/>
+    <xacro:head parent="fr3_duo_mount_mounting_point"/>
 
     <!-- The FR3 Duo Arms -->
     <xacro:property name="only_arm_robot_types_list" value="${robot_types_list[1:]}"/>
