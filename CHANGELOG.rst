@@ -7,6 +7,8 @@ UNRELEASED
 
 * chore: Split the franka head, spine and mount out of fr3_duo/mobile_fr3_duo
 * fix: mobile_fr3_duo.urdf.xacro forwards is_async and thead_priority to ros2_control parts 
+* chore: refactored franka_arm.xacro configs
+* fix: arm_prefixes index fixed for mfr3duo
 
 2.6.0 (2026-03-02)
 ------------------
