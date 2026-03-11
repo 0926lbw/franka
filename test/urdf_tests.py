@@ -13,11 +13,12 @@
 #  limitations under the License.
 
 from os import path
+import xml.etree.ElementTree as ET
 
 from ament_index_python.packages import get_package_share_directory
+
 import pytest
 import xacro
-import xml.etree.ElementTree as ET
 
 ARM_ROBOT_TYPES = [
     'fer',
@@ -43,13 +44,13 @@ def get_urdf_xacro(robot_type: str):
 def test_urdf_is_well_formed(robot_type: str, gazebo: str):
     urdf = xacro.process_file(
         get_urdf_xacro(robot_type),
-        mappings = {
-            'gazebo' : gazebo
+        mappings={
+            'gazebo': gazebo
         }
     ).toxml()
     root = ET.fromstring(urdf)
-    assert root.tag == "robot", "urdf must have topmost level robot tag"
-    assert len(root) > 0, "urdf cannot be empty"
+    assert root.tag == 'robot', 'urdf must have topmost level robot tag'
+    assert len(root) > 0, 'urdf cannot be empty'
 
 
 @pytest.mark.parametrize('robot_type', ARM_ROBOT_TYPES)
@@ -74,9 +75,11 @@ def test_with_ee(robot_type: str):
     ).toxml()
     root = ET.fromstring(urdf)
     assert root.find(
-        f".//joint[@name='{robot_type}_finger_joint1']") is not None, "urdf must contain the finger 1 joint tag"
+        f".//joint[@name='{robot_type}_finger_joint1']") is not None, \
+        'urdf must contain the finger 1 joint tag'
     assert root.find(
-        f".//joint[@name='{robot_type}_finger_joint2']") is not None, "urdf must contain the finger 2 joint tag"
+        f".//joint[@name='{robot_type}_finger_joint2']") is not None, \
+        'urdf must contain the finger 2 joint tag'
 
 
 @pytest.mark.parametrize('robot_type', ROBOT_TYPES)
@@ -96,8 +99,10 @@ def test_check_interfaces(robot_type: str):
 def test_load_with_fake_hardware(robot_type: str):
     """Test of use_fake_hardware parameter for ros2_control hardware interface."""
     urdf = xacro.process_file(
-        get_urdf_xacro(robot_type), mappings={'ros2_control': 'true', 'use_fake_hardware': 'true'}
-    ).toxml()
+        get_urdf_xacro(robot_type),
+        mappings={
+            'ros2_control': 'true',
+            'use_fake_hardware': 'true'}).toxml()
     assert urdf.find('mock_components/GenericSystem') is not None
 
 
