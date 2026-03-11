@@ -27,7 +27,7 @@ ARM_ROBOT_TYPES = [
     'fr3v2_1',
 ]
 
-ROBOT_TYPES = ARM_ROBOT_TYPES + ['tmrv0_2', 'mobile_fr3_duo_v0_2']
+ROBOT_TYPES = ARM_ROBOT_TYPES + ['tmrv0_2', 'fr3_duo', 'mobile_fr3_duo_v0_2']
 
 
 def get_urdf_xacro(robot_type: str):
@@ -81,11 +81,11 @@ def test_check_interfaces(robot_type: str):
     urdf = xacro.process_file(
         get_urdf_xacro(robot_type), mappings={'ros2_control': 'true'}
     ).toxml()
-    assert urdf.find('state_interface') is not None
-    assert urdf.find('command_interface') is not None
-    assert urdf.find('position') is not None
-    assert urdf.find('velocity') is not None
-    assert urdf.find('effort') is not None
+    assert urdf.find('state_interface') != -1
+    assert urdf.find('command_interface') != -1
+    assert urdf.find('position') != -1
+    assert urdf.find('velocity') != -1
+    assert urdf.find('effort') != -1
 
 
 @pytest.mark.parametrize('robot_type', ARM_ROBOT_TYPES)
