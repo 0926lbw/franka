@@ -56,20 +56,8 @@
 
         <!-- Spawn the robot -->
         <xacro:property name="robot_type_i" value="${robot_types_list[i]}"/>
-        <xacro:arg name="inertials_path" default="$(find franka_description)/robots/${robot_type_i}/inertials.yaml"/>
-        <xacro:arg name="kinematics_path" default="$(find franka_description)/robots/${robot_type_i}/kinematics.yaml"/>
-        <xacro:arg name="dynamics_path" default="$(find franka_description)/robots/${robot_type_i}/dynamics.yaml"/>
-        <xacro:arg name="joint_limits_path"
-          default="$(find franka_description)/robots/${robot_type_i}/joint_limits.yaml"/>
-        <xacro:arg name="accelerometers_path"
-          default="$(find franka_description)/robots/${robot_type_i}/accelerometers.yaml"/>
         <xacro:franka_robot
           robot_type="${robot_type_i}"
-          joint_limits="${xacro.load_yaml('$(arg joint_limits_path)')}"
-          inertials="${xacro.load_yaml('$(arg inertials_path)')}"
-          kinematics="${xacro.load_yaml('$(arg kinematics_path)')}"
-          dynamics="${xacro.load_yaml('$(arg dynamics_path)')}"
-          accelerometer_config="${xacro.load_yaml('$(arg accelerometers_path)')}"
           gazebo="${gazebo}"
           hand="${hand}"
           ee_id="${ee_id}"

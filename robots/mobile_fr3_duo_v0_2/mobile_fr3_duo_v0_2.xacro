@@ -4,28 +4,28 @@
   <xacro:macro
     name="mobile_fr3_duo_v0_2"
     params="robot_types
-                        hand
-                        ros2_control
-                        gazebo
-                        gazebo_effort
-                        use_fake_hardware
-                        fake_sensor_commands
-                        reduced_version
-                        robot_ips
-                        description_pkg
-                        connected_to
-                        use_arms
-                        no_prefix
-                        ee_id
-                        special_connection
-                        xyz_ee
-                        rpy_ee
-                        tcp_xyz
-                        tcp_rpy
-                        safety_distance
-                        with_sc
-                        is_async:=false
-                        thread_priority:=50">
+            hand
+            ros2_control
+            gazebo
+            gazebo_effort
+            use_fake_hardware
+            fake_sensor_commands
+            reduced_version
+            robot_ips
+            description_pkg
+            connected_to
+            use_arms
+            no_prefix
+            ee_id
+            special_connection
+            xyz_ee
+            rpy_ee
+            tcp_xyz
+            tcp_rpy
+            safety_distance
+            with_sc
+            is_async:=false
+            thread_priority:=50">
 
     <xacro:include filename="$(find franka_description)/accessories/franka_head_v0_2/franka_head.xacro"/>
     <xacro:include filename="$(find franka_description)/accessories/franka_spine_v0_1/franka_spine.xacro"/>

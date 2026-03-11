@@ -83,11 +83,6 @@
   </xacro:if>
 
   <xacro:franka_robot robot_type="fr3"
-    joint_limits="${xacro.load_yaml('$(find franka_description)/robots/fr3/joint_limits.yaml')}"
-    inertials="${xacro.load_yaml('$(find franka_description)/robots/fr3/inertials.yaml')}"
-    kinematics="${xacro.load_yaml('$(find franka_description)/robots/fr3/kinematics.yaml')}"
-    accelerometer_config="${xacro.load_yaml('$(find franka_description)/robots/fr3/accelerometers.yaml')}"
-    dynamics="${xacro.load_yaml('$(find franka_description)/robots/fr3/dynamics.yaml')}"
     gazebo="$(arg gazebo)"
     hand="$(arg hand)"
     ee_id="$(arg ee_id)"

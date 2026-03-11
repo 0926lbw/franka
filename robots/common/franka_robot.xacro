@@ -2,11 +2,6 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:macro name="franka_robot"
     params="robot_type
-                      joint_limits
-                      kinematics
-                      accelerometer_config:=none
-                      inertials
-                      dynamics
                       parent:='world'
                       xyz:='0 0 0'
                       rpy:='0 0 0'
@@ -44,11 +39,6 @@
       rpy="${rpy}"
       safety_distance="0.03"
       gazebo="${gazebo}"
-      joint_limits="${joint_limits}"
-      kinematics="${kinematics}"
-      accelerometer_config="${accelerometer_config}"
-      inertials="${inertials}"
-      dynamics="${dynamics}"
       with_sc="${with_sc}"
       connected_to="${connected_to}"
     />
