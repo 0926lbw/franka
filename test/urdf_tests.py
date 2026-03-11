@@ -1,4 +1,4 @@
-#  Copyright (c) 2023 Franka Robotics GmbH
+#  Copyright (c) 2026 Franka Robotics GmbH
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -15,66 +15,97 @@
 from os import path
 
 from ament_index_python.packages import get_package_share_directory
+import pytest
 import xacro
+import xml.etree.ElementTree as ET
 
-robot_type_ = 'fer'
+ARM_ROBOT_TYPES = [
+    'fer',
+    'fp3',
+    'fr3',
+    'fr3v2',
+    'fr3v2_1',
+]
 
-xacro_file_name = path.join(
-    get_package_share_directory('franka_description'),
-    'robots',
-    robot_type_,
-    robot_type_ + '.urdf.xacro',
-)
+ROBOT_TYPES = ARM_ROBOT_TYPES + ['tmrv0_2', 'mobile_fr3_duo_v0_2']
 
 
-def test_load():
+def get_urdf_xacro(robot_type: str):
+    return path.join(
+        get_package_share_directory('franka_description'),
+        'robots',
+        robot_type,
+        robot_type + '.urdf.xacro')
+
+
+@pytest.mark.parametrize('robot_type', ROBOT_TYPES)
+def test_urdf_is_well_formed(robot_type: str):
+    urdf = xacro.process_file(
+        get_urdf_xacro(robot_type),
+    ).toxml()
+    root = ET.fromstring(urdf)
+    assert root.tag == "robot", "urdf must have topmost level robot tag"
+    assert len(root) > 0, "urdf cannot be empty"
+
+
+@pytest.mark.parametrize('robot_type', ARM_ROBOT_TYPES)
+def test_without_ee(robot_type: str):
     """Test of hand parameter equal to none."""
     urdf = xacro.process_file(
-        xacro_file_name,
+        get_urdf_xacro(robot_type),
         mappings={
-            'robot_type': 'fer',
             'ee_id': 'none',
         },
     ).toxml()
-    assert urdf.find('fer_finger_joint1') == -1
+    root = ET.fromstring(urdf)
+    assert root.find(f".//joint[@name='{robot_type}_finger_joint1']") is None
+    assert root.find(f".//joint[@name='{robot_type}_finger_joint2']") is None
 
 
-def test_load_with_gripper():
+@pytest.mark.parametrize('robot_type', ARM_ROBOT_TYPES)
+def test_with_ee(robot_type: str):
     """Test of hand parameter equal to a value."""
     urdf = xacro.process_file(
-        xacro_file_name, mappings={'robot_type': 'fer', 'ee_id': 'franka_hand'}
+        get_urdf_xacro(robot_type), mappings={'ee_id': 'franka_hand'}
     ).toxml()
-    assert urdf.find('fer_finger_joint') != -1
+    root = ET.fromstring(urdf)
+    assert root.find(
+        f".//joint[@name='{robot_type}_finger_joint1']") is not None, "urdf must contain the finger 1 joint tag"
+    assert root.find(
+        f".//joint[@name='{robot_type}_finger_joint2']") is not None, "urdf must contain the finger 2 joint tag"
 
 
-def test_check_interfaces():
+@pytest.mark.parametrize('robot_type', ROBOT_TYPES)
+def test_check_interfaces(robot_type: str):
     """Test of the parameters for ros2_control hardware interface."""
     urdf = xacro.process_file(
-        xacro_file_name, mappings={'ros2_control': 'true'}
+        get_urdf_xacro(robot_type), mappings={'ros2_control': 'true'}
     ).toxml()
-    assert urdf.find('state_interface') != -1
-    assert urdf.find('command_interface') != -1
-    assert urdf.find('position') != -1
-    assert urdf.find('velocity') != -1
-    assert urdf.find('effort') != -1
+    assert urdf.find('state_interface') is not None
+    assert urdf.find('command_interface') is not None
+    assert urdf.find('position') is not None
+    assert urdf.find('velocity') is not None
+    assert urdf.find('effort') is not None
 
 
-def test_load_with_fake_hardware():
+@pytest.mark.parametrize('robot_type', ARM_ROBOT_TYPES)
+def test_load_with_fake_hardware(robot_type: str):
     """Test of use_fake_hardware parameter for ros2_control hardware interface."""
     urdf = xacro.process_file(
-        xacro_file_name, mappings={'ros2_control': 'true', 'use_fake_hardware': 'true'}
+        get_urdf_xacro(robot_type), mappings={'ros2_control': 'true', 'use_fake_hardware': 'true'}
     ).toxml()
-    assert urdf.find('mock_components/GenericSystem') != -1
+    assert urdf.find('mock_components/GenericSystem') is not None
 
 
-def test_load_with_robot_ip():
+@pytest.mark.parametrize('robot_type', ARM_ROBOT_TYPES)
+def test_load_with_robot_ip(robot_type: str):
     """Test of robot_ip parameter for ros2_control hardware interface."""
     urdf = xacro.process_file(
-        xacro_file_name,
+        get_urdf_xacro(robot_type),
         mappings={'ros2_control': 'true', 'robot_ip': 'franka_ip_address'},
     ).toxml()
-    assert urdf.find('franka_ip_address') != -1
+    assert urdf.find('franka_ip_address') is not None
 
 
 if __name__ == '__main__':
-    pass
+    pytest.main([__file__])
