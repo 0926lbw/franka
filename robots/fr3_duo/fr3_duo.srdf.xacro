@@ -44,12 +44,20 @@
               <disable_collisions link1="${full_arm_prefix}link2" link2="${full_arm_prefix}hand" reason="UserDisable"/>
               <disable_collisions link1="${full_arm_prefix}link2" link2="${full_arm_prefix}leftfinger" reason="UserDisable"/>
               <disable_collisions link1="${full_arm_prefix}link2" link2="${full_arm_prefix}rightfinger" reason="UserDisable"/>
-              
+
               <disable_collisions link1="${full_arm_prefix}link5" link2="${full_arm_prefix}hand" reason="UserDisable"/>
               <disable_collisions link1="${full_arm_prefix}link5" link2="${full_arm_prefix}leftfinger" reason="UserDisable"/>
               <disable_collisions link1="${full_arm_prefix}link5" link2="${full_arm_prefix}rightfinger" reason="UserDisable"/>
           </xacro:if>
       </xacro:if>
+  </xacro:macro>
+
+  <xacro:macro name="disable_mount_collisions" params="full_arm_prefix link2">
+      <disable_collisions link1="${full_arm_prefix}link0" link2="${link2}" reason="Adjacent"/>
+      <disable_collisions link1="${full_arm_prefix}link1" link2="${link2}" reason="Never"/>
+      <disable_collisions link1="${full_arm_prefix}link2" link2="${link2}" reason="Never"/>
+      <disable_collisions link1="${full_arm_prefix}link3" link2="${link2}" reason="Never"/>
+      <disable_collisions link1="${full_arm_prefix}link4" link2="${link2}" reason="Never"/>
   </xacro:macro>
 
   <xacro:macro name="loop" params="i">
@@ -59,23 +67,16 @@
           <xacro:property name="robot_type" value="${robot_types_list[i]}"/>
           <xacro:property name="full_arm_prefix" value="${robot_prefix}${robot_type}_" />
           <xacro:franka_arm_srdf robot_type="${robot_type}"
-                                 hand="$(arg hand)" 
-                                 ee_id="$(arg ee_id)" 
+                                 hand="$(arg hand)"
+                                 ee_id="$(arg ee_id)"
                                  arm_prefix="${robot_prefix}"
                                  no_prefix='false'/>
 
           <xacro:missing_self_arm_collisions full_arm_prefix="${full_arm_prefix}"/>
 
-          <disable_collisions link1="${full_arm_prefix}link0" link2="cover_link" reason="Never"/>
-          <disable_collisions link1="${full_arm_prefix}link1" link2="cover_link" reason="Default"/>
-          <disable_collisions link1="${full_arm_prefix}link2" link2="cover_link" reason="Never"/>
-          <disable_collisions link1="${full_arm_prefix}link3" link2="cover_link" reason="Never"/>
-
-          <disable_collisions link1="${full_arm_prefix}link0" link2="mount_link" reason="Adjacent"/>
-          <disable_collisions link1="${full_arm_prefix}link1" link2="mount_link" reason="Never"/>
-          <disable_collisions link1="${full_arm_prefix}link2" link2="mount_link" reason="Never"/>
-          <disable_collisions link1="${full_arm_prefix}link3" link2="mount_link" reason="Never"/>
-          <disable_collisions link1="${full_arm_prefix}link4" link2="mount_link" reason="Never"/>
+          <xacro:disable_mount_collisions full_arm_prefix="${full_arm_prefix}" link2="fr3_duo_mount_mounting_point"/>
+          <xacro:disable_mount_collisions full_arm_prefix="${full_arm_prefix}" link2="fr3_duo_mount_origin"/>
+          <xacro:disable_mount_collisions full_arm_prefix="${full_arm_prefix}" link2="fr3_duo_mount_${arm_prefixes_list[i]}"/>
 
           <xacro:loop i="${i+1}" />
       </xacro:unless>
@@ -83,7 +84,11 @@
 
   <xacro:loop i="0"/>
 
-  <disable_collisions link1="cover_link" link2="mount_link" reason="Adjacent"/>
+  <disable_collisions link1="fr3_duo_mount_mounting_point" link2="fr3_duo_mount_origin" reason="Adjacent"/>
+  <disable_collisions link1="fr3_duo_mount_mounting_point" link2="fr3_duo_mount_${arm_prefixes_list[0]}" reason="Adjacent"/>
+  <disable_collisions link1="fr3_duo_mount_mounting_point" link2="fr3_duo_mount_${arm_prefixes_list[1]}" reason="Adjacent"/>
+  <disable_collisions link1="fr3_duo_mount_origin" link2="fr3_duo_mount_${arm_prefixes_list[0]}" reason="Adjacent"/>
+  <disable_collisions link1="fr3_duo_mount_origin" link2="fr3_duo_mount_${arm_prefixes_list[1]}" reason="Adjacent"/>
 
   <xacro:macro name="cross_arm_loop" params="left_idx right_idx_start right_idx_end">
       <xacro:property name="robot_prefix_left" value="${arm_prefixes_list[0]}_"/>
