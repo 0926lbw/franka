@@ -39,7 +39,7 @@
       </collision>
       <inertial>
         <origin xyz="-0.00019 ${offset_wheel_sign*0.04522} 0.02947" rpy="0 0 0"/>
-        <mass value="11.5"/>
+        <mass value="7.0"/>
         <inertia
           ixx="0.07060497424"
           ixy="-0.00025482709"
@@ -60,9 +60,9 @@
      <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="2.0"/>
-        <inertia ixx="0.1" ixy="0.0" ixz="0.0"
-                 iyy="0.1" iyz="0.0"
-                 izz="0.1"/>
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+                 iyy="0.001" iyz="0.0"
+                 izz="0.001"/>
       </inertial>
     </link>
 

@@ -11,6 +11,7 @@ UNRELEASED
 * chore: refactored franka_arm.xacro configs
 * fix: arm_prefixes index fixed for mfr3duo
 * fix: corrected fr3_duo base mount for gazebo
+* fix: tmr inertials updated
 
 2.6.0 (2026-03-02)
 ------------------
