@@ -50,6 +50,7 @@
         </geometry>
       </collision>
     </link>
+    
     <link name="base_inertia">
       <inertial>
         <origin xyz="0.006619 -0.002210 0.184355" rpy="0 0 0"/>
@@ -163,6 +164,8 @@
         fake_sensor_commands="${fake_sensor_commands}"
         robot_namespace="${robot_namespace}"
         gazebo="${gazebo}"
+        is_async="${is_async}"
+        thread_priority="${thread_priority}"
       />
     </xacro:if>
   </xacro:macro>

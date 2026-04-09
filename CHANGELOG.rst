@@ -13,6 +13,8 @@ UNRELEASED
 * fix: corrected fr3_duo base mount for gazebo
 * fix: tmr inertials updated
 * feat: ros2 control file added for fr3 duo
+* fix: mobile_fr3_duo.urdf.xacro forwards is_async and thead_priority to ros2_control parts
+* feat: added mobile_fr3_duo_v0_2.srdf.xacro for moveit support and collision checking
 
 2.6.0 (2026-03-02)
 ------------------
