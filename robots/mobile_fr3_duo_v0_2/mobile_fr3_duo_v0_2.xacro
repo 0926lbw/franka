@@ -27,7 +27,6 @@
             is_async:=false
             thread_priority:=50">
 
-    <xacro:include filename="$(find franka_description)/accessories/franka_head_v0_2/franka_head.xacro"/>
     <xacro:include filename="$(find franka_description)/accessories/franka_spine_v0_1/franka_spine.xacro"/>
     <xacro:include filename="$(find franka_description)/robots/common/franka_robot.xacro"/>
     <xacro:include filename="$(find franka_description)/robots/tmrv0_2/tmrv0_2.xacro"/>
@@ -69,9 +68,8 @@
       is_async="${is_async}"
       thread_priority="${thread_priority}"/>
 
-    <!-- Head and Spine -->
+    <!-- Spine -->
     <xacro:franka_spine parent="base_link"/>
-    <xacro:head parent="fr3_duo_mount_mounting_point"/>
 
     <!-- The FR3 Duo Arms -->
     <xacro:property name="only_arm_robot_types_list" value="${robot_types_list[1:]}"/>
@@ -99,7 +97,8 @@
       connected_to="${connected_to}"
       arm_prefixes="${arm_prefixes_list}"
       is_async="${is_async}"
-      thread_priority="${thread_priority}"/>
+      thread_priority="${thread_priority}"
+      is_mobile_fr3_duo="true"/>
 
     <xacro:if value="${gazebo}">
       <xacro:mobile_fr3_duo_ros2_control
