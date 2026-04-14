@@ -5,6 +5,7 @@ Changelog for package franka_description
 UNRELEASED
 ----------
 
+* feat: add GitHub Actions workflow to generate and release URDFs for fr3_duo, mobile_fr3_duo_v0_2, and fr3v2_1
 * docu: Added the docu to FCI docs
 * chore: Split the franka head, spine and mount out of fr3_duo/mobile_fr3_duo and adapted srdf
 * fix: mobile_fr3_duo.urdf.xacro forwards is_async and thead_priority to ros2_control parts

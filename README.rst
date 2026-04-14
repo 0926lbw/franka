@@ -1,6 +1,9 @@
 franka_description
 ==================
 
+.. image:: https://github.com/frankarobotics/franka_description/actions/workflows/generate-urdfs.yml/badge.svg
+   :target: https://github.com/frankarobotics/franka_description/actions/workflows/generate-urdfs.yml
+
 Overview
 --------
 
