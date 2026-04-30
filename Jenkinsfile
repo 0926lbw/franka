@@ -292,7 +292,8 @@ pipeline {
             }
             anyOf {
               buildingTag()
-              branch 'PRCUN-6197-franka-description-on-jenkins' // TODO: remove after testing
+              branch "main"  // main should always be published, it is the fallback for other pipelines
+              // branch "${env.BRANCH_NAME}" // or current branch? 
             }
           }
           steps {
