@@ -2,6 +2,11 @@
 Changelog for package franka_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.7.1 (2026-05-04)
+------------------
+
+* fix: trigger workflow on X.Y.Z tags instead of v* prefix
+
 2.7.0 (2026-05-04)
 ------------------
 

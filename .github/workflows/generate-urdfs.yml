@@ -3,7 +3,7 @@ name: Generate URDFs and Release
 on:
   push:
     tags:
-      - 'v*'
+      - '*.*.*'
 
 jobs:
   generate-urdfs:
