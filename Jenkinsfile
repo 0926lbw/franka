@@ -65,27 +65,6 @@ pipeline {
       }
     }
 
-    stage('Trigger upstream franka_ros2_ws builds') {
-      parallel {
-        stage('humble') {
-          steps {
-            build job: 'FCI/franka_ros2_ws/humble',
-              wait: true,
-              propagate: true,
-              parameters: [string(name: 'frankaDescriptionBranch', value: env.BRANCH_NAME)]
-          }
-        }
-        stage('jazzy') {
-          steps {
-            build job: 'FCI/franka_ros2_ws/jazzy',
-              wait: true,
-              propagate: true,
-              parameters: [string(name: 'frankaDescriptionBranch', value: env.BRANCH_NAME)]
-          }
-        }
-      }
-    }
-
     stage('Build robot URDFs and SRDFs') {
       matrix {
         axes {
@@ -292,8 +271,8 @@ pipeline {
             }
             anyOf {
               buildingTag()
-              branch "main"  // main should always be published, it is the fallback for other pipelines
-              // branch "${env.BRANCH_NAME}" // or current branch? 
+              // branch "main"  // main should always be published, it is the fallback for other pipelines
+              branch "${env.BRANCH_NAME}" // or current branch? 
             }
           }
           steps {
@@ -302,6 +281,28 @@ pipeline {
         }
       }
     }
+
+    stage('Trigger upstream franka_ros2_ws builds') {
+      parallel {
+        stage('humble') {
+          steps {
+            build job: 'FCI/franka_ros2_ws/humble',
+              wait: true,
+              propagate: true,
+              parameters: [string(name: 'frankaDescriptionBranch', value: env.BRANCH_NAME)]
+          }
+        }
+        stage('jazzy') {
+          steps {
+            build job: 'FCI/franka_ros2_ws/jazzy',
+              wait: true,
+              propagate: true,
+              parameters: [string(name: 'frankaDescriptionBranch', value: env.BRANCH_NAME)]
+          }
+        }
+      }
+    }
+
   } // stages
 
   // post is guaranteed to run at the end of a Pipeline’s execution
