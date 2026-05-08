@@ -277,6 +277,7 @@ pipeline {
           }
           steps {
             fePublishOpkg("*.ipk", "mc7-5x")
+            fePublishBuildInfo()
           }
         }
       }
@@ -307,9 +308,8 @@ pipeline {
 
   // post is guaranteed to run at the end of a Pipeline’s execution
   post {
-    success {
-      fePublishBuildInfo()
-    }
+    // success {
+    // }
     always {
       sh 'git clean -x -d -f'
       cleanWs()
