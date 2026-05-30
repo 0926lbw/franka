@@ -1,19 +1,13 @@
 #!groovy
 
+@Library('fe-gitlab-pipeline-steps@lts-2.2') _
+import de.franka.jenkins.FePipelineOptionDefaults
 pipeline {
-
-  libraries {
-    lib('fe-pipeline-steps@1.6.0')
-  }
 
   agent {
     node {
       label 'docker'
     }
-  }
-
-  triggers {
-    pollSCM('H/5 * * * *')
   }
 
   environment {
@@ -26,6 +20,13 @@ pipeline {
   options {
     // copyArtifactPermission('*')
     timeout(time: 2, unit: 'HOURS')
+      gitLabConnection(FePipelineOptionDefaults.GITLAB_CONNECTION)
+      buildDiscarder(logRotator(
+          numToKeepStr: FePipelineOptionDefaults.BUILD_DISCARDER.numToKeepStr,
+          daysToKeepStr: FePipelineOptionDefaults.BUILD_DISCARDER.daysToKeepStr,
+          artifactNumToKeepStr: FePipelineOptionDefaults.BUILD_DISCARDER.artifactNumToKeepStr,
+          artifactDaysToKeepStr: FePipelineOptionDefaults.BUILD_DISCARDER.artifactDaysToKeepStr
+      ))
   }
 
   stages {
@@ -315,7 +316,7 @@ pipeline {
       cleanWs()
       sh 'du -h --max-depth=1 . && ls -la'
       script {
-        notifyBitbucket()
+        feNotifySCM(currentBuild.result)
       }
     }
   }// post
