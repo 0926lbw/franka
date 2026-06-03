@@ -2,6 +2,11 @@
 Changelog for package franka_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Unreleased
+----------
+
+* feat: add ForceTorqueSensor to ros2_control xacro exposing K_F_ext_hat_K (force.x/y/z, torque.x/y/z)
+
 2.7.1 (2026-05-04)
 ------------------
 
