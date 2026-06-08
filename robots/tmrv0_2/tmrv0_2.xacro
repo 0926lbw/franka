@@ -3,13 +3,7 @@
 
   <xacro:macro name="tmrv0_2"
     params="mobile_robot_type
-                  robot_ip:=''
-                  ros2_control:=true
-                  use_fake_hardware:=false
-                  fake_sensor_commands:=false
                   reduced_version:=false
-                  is_async:=false
-                  thread_priority:=50
                   robot_namespace:=''
                   gazebo:=false">
 
@@ -155,18 +149,5 @@
       <origin xyz="-0.3275 -0.2175 0.19065" rpy="0 ${pi} ${pi*7/4}"/>
     </joint>
 
-    <xacro:if value="${ros2_control}">
-      <xacro:include filename="$(find franka_description)/robots/tmrv0_2/tmrv0_2.ros2_control.xacro"/>
-      <xacro:tmrv0_2_ros2_control
-        mobile_robot_type="${mobile_robot_type}"
-        robot_ip="${robot_ip}"
-        use_fake_hardware="${use_fake_hardware}"
-        fake_sensor_commands="${fake_sensor_commands}"
-        robot_namespace="${robot_namespace}"
-        gazebo="${gazebo}"
-        is_async="${is_async}"
-        thread_priority="${thread_priority}"
-      />
-    </xacro:if>
   </xacro:macro>
 </robot>

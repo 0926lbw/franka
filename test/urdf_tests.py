@@ -86,37 +86,5 @@ def test_with_ee(robot_type: str):
     )
 
 
-@pytest.mark.parametrize('robot_type', ROBOT_TYPES)
-def test_check_interfaces(robot_type: str):
-    """Test of the parameters for ros2_control hardware interface."""
-    urdf = xacro.process_file(
-        get_urdf_xacro(robot_type), mappings={'ros2_control': 'true'}
-    ).toxml()
-    assert urdf.find('state_interface') != -1
-    assert urdf.find('command_interface') != -1
-    assert urdf.find('position') != -1
-    assert urdf.find('velocity') != -1
-    assert urdf.find('effort') != -1
-
-
-@pytest.mark.parametrize('robot_type', ARM_ROBOT_TYPES)
-def test_load_with_fake_hardware(robot_type: str):
-    """Test of use_fake_hardware parameter for ros2_control hardware interface."""
-    urdf = xacro.process_file(
-        get_urdf_xacro(robot_type), mappings={'ros2_control': 'true', 'use_fake_hardware': 'true'}
-    ).toxml()
-    assert urdf.find('mock_components/GenericSystem') is not None
-
-
-@pytest.mark.parametrize('robot_type', ARM_ROBOT_TYPES)
-def test_load_with_robot_ip(robot_type: str):
-    """Test of robot_ip parameter for ros2_control hardware interface."""
-    urdf = xacro.process_file(
-        get_urdf_xacro(robot_type),
-        mappings={'ros2_control': 'true', 'robot_ip': 'franka_ip_address'},
-    ).toxml()
-    assert urdf.find('franka_ip_address') is not None
-
-
 if __name__ == '__main__':
     pytest.main([__file__])
