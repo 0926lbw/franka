@@ -6,6 +6,7 @@ Unreleased
 ----------
 
 * feat: add ForceTorqueSensor to ros2_control xacro exposing K_F_ext_hat_K (force.x/y/z, torque.x/y/z)
+* fix: corrected FR3 Duo mount angles in kinematics.yaml to match CAD values [51.18507533 deg, -10.00159382 deg, 26.54771649 deg]
 
 2.7.1 (2026-05-04)
 ------------------
