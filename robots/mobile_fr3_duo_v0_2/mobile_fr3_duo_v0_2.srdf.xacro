@@ -334,4 +334,7 @@
     <disable_collisions link1="fr3_duo_mount_mounting_point" link2="head_link" reason="Adjacent"/>
     <disable_collisions link1="fr3_duo_mount_mounting_point" link2="left_fr3v2_link0" reason="Adjacent"/>
     <disable_collisions link1="fr3_duo_mount_mounting_point" link2="right_fr3v2_link0" reason="Adjacent"/>
+    <disable_collisions link1="fr3_duo_mount_mounting_point" link2="franka_spine" reason="Never"/>
+    <disable_collisions link1="fr3_duo_mount_mounting_point" link2="left_fr3v2_link1" reason="Never"/>
+    <disable_collisions link1="fr3_duo_mount_mounting_point" link2="right_fr3v2_link1" reason="Never"/>
 `</robot>
