@@ -2,8 +2,8 @@
 Changelog for package franka_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.8.0 (2026-06-23)
+------------------
 
 * refactor: move ros2_control xacro content out of franka_description into franka_hardware (description is now distro-agnostic, free of ros2_control coupling)
 * fix: corrected FR3 Duo mount angles in kinematics.yaml to match CAD values [51.18507533 deg, -10.00159382 deg, 26.54771649 deg]
