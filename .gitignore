@@ -3,3 +3,18 @@
 *.env
 *.srdf
 .vscode
+
+# Local ROS workspaces and generated state
+/build/
+/install/
+/log/
+__pycache__/
+.pytest_cache/
+
+# Local checkouts kept next to this package
+/franka_ros2/
+/libsurvive/
+
+# Local editor and assistant state
+.claude/
+.write_probe
