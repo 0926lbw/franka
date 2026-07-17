@@ -1,0 +1,74 @@
+/**:
+  controller_manager:
+    ros__parameters:
+      update_rate: 1000  # Hz
+
+      joint_state_broadcaster:
+        type: joint_state_broadcaster/JointStateBroadcaster
+
+      joint_trajectory_controller:
+        type: joint_trajectory_controller/JointTrajectoryController
+
+      franka_robot_state_broadcaster:
+        type: franka_robot_state_broadcaster/FrankaRobotStateBroadcaster
+
+      joint_impedance_pose_controller:
+        type: franka_arm_controllers/JointImpedancePoseController
+
+  joint_impedance_pose_controller:
+    ros__parameters:
+      target_pose_topic: /franka_controller/target_cartesian_pose
+      target_pose_is_relative: false
+      kdl_desired_joint_states_topic: /franka_controller/kdl_desired_joint_states
+      ik_backend: kdl
+      moveit_compute_ik_service: /compute_ik
+      # Empty robot-specific names are derived from arm_id at runtime.
+      moveit_group_name: ""
+      moveit_base_frame: base
+      moveit_ik_link_name: ""
+      base_link_name: base
+      tcp_link_name: ""
+      max_target_linear_step: 0.007
+      max_target_angular_step: 0.03
+      target_timeout_sec: 0.25
+      kdl_desired_joint_states_publish_rate_hz: 60.0
+      ik_max_iterations: 1000
+      ik_eps: 1.0e-3
+      fake_preview_follow_desired_state: true
+      k_gains:
+        - 600.0
+        - 600.0
+        - 600.0
+        - 600.0
+        - 250.0
+        - 150.0
+        - 50.0
+      d_gains:
+        - 30.0
+        - 30.0
+        - 30.0
+        - 30.0
+        - 10.0
+        - 10.0
+        - 5.0
+  joint_trajectory_controller:
+    ros__parameters:
+      joints:
+        - fr3_joint1
+        - fr3_joint2
+        - fr3_joint3
+        - fr3_joint4
+        - fr3_joint5
+        - fr3_joint6
+        - fr3_joint7
+      command_interfaces:
+        - position
+      state_interfaces:
+        - position
+        - velocity
+      allow_partial_joints_goal: false
+      open_loop_control: false
+      constraints:
+        stopped_velocity_tolerance: 0.02
+        goal_time: 2.0
+

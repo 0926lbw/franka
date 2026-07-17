@@ -11,10 +11,22 @@
 __pycache__/
 .pytest_cache/
 
-# Local checkouts kept next to this package
-/franka_ros2/
-/libsurvive/
+# Generated artifacts in vendored workspaces
+/franka_ros2/build/
+/franka_ros2/install/
+/franka_ros2/log/
+/franka_ros2/.pytest_cache/
+/libsurvive/build/
+/libsurvive/.cache/
 
 # Local editor and assistant state
 .claude/
 .write_probe
+
+# Local/editor artifacts inside vendored sources
+**/.DS_Store
+/libsurvive/tools/avr_codegen/test.elf
+/libsurvive/tools/avr_codegen/test.hex
+
+# Static test fixtures are source files, not generated URDF output
+!franka_ros2/franka_hardware/test/*.urdf

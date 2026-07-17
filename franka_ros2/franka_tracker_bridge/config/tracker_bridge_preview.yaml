@@ -1,0 +1,73 @@
+libsurvive_pose_node:
+  ros__parameters:
+    pose_topic: /tracker/pose
+    deadman_topic: /tracker/deadman
+    world_frame: libsurvive_world
+    target_serial: ""
+    lock_first_object: true
+    ignore_lighthouses: true
+    publish_deadman: false
+    deadman_value: true
+    libsurvive_args: ""
+
+tracker_pose_target_node:
+  ros__parameters:
+    pose_topic: /tracker/pose
+    joint_states_topic: /joint_states
+    deadman_topic: /tracker/deadman
+    joy_topic: /joy
+    deadman_joy_button: -1
+    target_pose_is_relative: false
+    target_pose_topic: /franka_controller/target_cartesian_pose
+    target_frame: base
+    deadman_initially_enabled: false
+    robot_type: fr3
+    load_gripper: false
+    ik_frame_name: fr3_link8
+    urdf_output_path: /tmp/franka_tracker_bridge/fr3_pose_target.urdf
+    translation_scale: [1.0, 1.0, 1.0]
+    rotation_scale: [1.0, 1.0, 1.0]
+    translation_limit: [-1.0, -1.0, -1.0]
+    rotation_limit: 3.141592653589793
+    tracker_low_pass_alpha: 0.25
+    translation_deadband: 0.003
+    rotation_deadband: 0.02
+    calibration_duration_sec: 3.0
+    calibration_sample_count: 30
+    coord_swap: [1, 0, 2]
+    coord_flip: [1.0, -1.0, 1.0]
+    coord_scale: [1.0, 1.0, 1.0]
+    base_xy_rotation_deg: 90.0
+    orientation_alignment_rpy_deg: [0.0, 0.0, 180.0]
+    tracker_rotation_scale: -1.0
+    tracker_rotation_axis_scale: [1.0, 1.0, -1.0]
+    tracker_rotation_axis_order: [0, 1, 2]
+    tracker_pos_soft_limit_mm: 15.0
+    tracker_pos_hard_limit_mm: 40.0
+    tracker_rot_soft_limit_deg: 6.0
+    tracker_rot_hard_limit_deg: 15.0
+    map_matrix: [1.0,  0.0, 0.0,
+                 0.0,  1.0, 0.0,
+                 0.0,  0.0, 1.0]
+
+tracker_meshcat_preview_node:
+  ros__parameters:
+    target_pose_topic: /franka_controller/target_cartesian_pose
+    joint_states_topic: /franka_controller/kdl_desired_joint_states
+    target_pose_is_relative: false
+    robot_type: fr3
+    load_gripper: false
+    initial_position: [0.4, 0.0, 0.4]
+    publish_rate_hz: 60.0
+    triad_length: 0.12
+    meshcat_zmq_url: ""
+    open_browser: true
+    urdf_output_path: /tmp/franka_tracker_bridge/fr3_meshcat.urdf
+    enable_robot_ik: false
+    ik_frame_name: fr3_link8
+    sync_target_to_robot_on_start: true
+    ik_max_iterations: 8
+    ik_error_tolerance: 0.001
+    ik_damping: 0.0001
+    ik_dt: 0.35
+    max_joint_step: 0.04

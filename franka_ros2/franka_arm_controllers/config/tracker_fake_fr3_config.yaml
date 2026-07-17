@@ -1,0 +1,15 @@
+robot1:
+  arm_id: "fr3"
+  arm_prefix: ""
+  fake_sensor_commands: "false"
+  joint_sources: ["joint_states"]
+  joint_state_rate: 30
+  load_gripper: "false"
+  namespace: ""
+  robot_ip: "dont-care"
+  urdf_package: "franka_arm_controllers"
+  urdf_file: "urdf/franka_arm.urdf.xacro"
+  target_pose_is_relative: "false"
+  use_fake_hardware: "true"
+  use_rviz: "false"
+  arm_mounting_orientation: [0, 0, 0]

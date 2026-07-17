@@ -1,0 +1,4 @@
+/**:
+  ros__parameters:
+    # Applied by the fake-hardware spawner after controllers.yaml.
+    target_pose_is_relative: true

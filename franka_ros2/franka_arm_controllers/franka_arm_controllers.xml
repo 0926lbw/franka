@@ -1,0 +1,9 @@
+<library path="franka_arm_controllers">
+  <class name="franka_arm_controllers/JointImpedancePoseController"
+      type="franka_arm_controllers::JointImpedancePoseController"
+      base_class_type="controller_interface::ControllerInterface">
+    <description>
+      Joint impedance controller with KDL IK driven by target Cartesian pose messages.
+    </description>
+  </class>
+</library>
